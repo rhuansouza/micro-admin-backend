@@ -1,11 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Mongoose } from 'mongoose';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { CategoriaSchema } from './interfaces/categorias/categoria.schema';
-import { JogadorSchema } from './interfaces/jogadores/jogador.schema';
-//import { ConfigModule } from '@nestjs/config';
+import { CategoriasModule } from './categorias/categorias.module';
+import { JogadoresModule } from './jogadores/jogadores.module';
+
 
 @Module({
   imports: [
@@ -18,15 +15,13 @@ import { JogadorSchema } from './interfaces/jogadores/jogador.schema';
         // useFindAndModify: false,
       },
     ),
-    MongooseModule.forFeature([
-      { name: 'Categoria', schema: CategoriaSchema },
-      { name: 'Jogador', schema: JogadorSchema },
-    ]),
+    CategoriasModule,
+    JogadoresModule,
     // CategoriasModule,
     // JogadoresModule,
     //ConfigModule.forRoot({ isGlobal: true }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

@@ -5,7 +5,8 @@ import { Logger } from '@nestjs/common';
 
 const logger = new Logger('Main');
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice(AppModule, {
+  
+  const  app = await NestFactory.createMicroservice(AppModule, {
     transport: Transport.RMQ,
     options: {
       urls: ['amqp://guest:guest@localhost:5672/smartranking'],
@@ -13,7 +14,17 @@ async function bootstrap() {
       queue: 'admin-backend',
     },
   });
-
+  
+  /*
+  const app = await NestFactory.createMicroservice(AppModule, {
+    transport: Transport.RMQ,
+    options: {
+      urls: ['amqp://guest:guest@localhost:5672/smartranking'],
+      noAck: false,
+      queue: 'desafios',
+    },
+  });
+  */
   await app.listen();
 }
 bootstrap();
